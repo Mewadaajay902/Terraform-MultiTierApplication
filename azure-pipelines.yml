@@ -56,7 +56,7 @@ stages:
                 scriptLocation: 'inlineScript'
                 inlineScript: |
                   echo "Applying Terraform Plan"
-                  terraform apply "$(Build.SourcesDirectory)/terraform-plan/tfplan.binary"  # Apply the plan
+                  terraform apply "$(Build.SourcesDirectory)/tfplan.binary"  # Apply the plan
 
  
 
