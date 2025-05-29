@@ -1,0 +1,52 @@
+trigger:
+  branches:
+    exclude:
+      - main  
+
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: terraformplan
+    jobs:
+       - job: terraformplan
+         steps:
+            - task: TerraformInstaller@1
+              inputs:
+                terraformVersion: 'latest'
+
+
+            - task: AzureCLI@2
+              inputs:
+                azureSubscription: $(serviceconnection)
+                scriptType: 'bash'
+                scriptLocation: 'inlineScript'
+                inlineScript: |
+                  echo "Initializing Terraform"
+                  terraform init \
+                    -backend-config="storage_account_name=$(storage_account_name)" \
+                    -backend-config="container_name=$(container_name)" \
+                    -backend-config="key=$(key)"
+
+            - task: AzureCLI@2
+              inputs:
+                azureSubscription: $(serviceconnection)
+                scriptType: 'bash'
+                scriptLocation: 'inlineScript'
+                inlineScript: |
+                  echo "Running Terraform Plan"
+                  terraform plan -out=tfplan.binary
+
+            - task: PublishBuildArtifacts@1
+              inputs:
+                pathToPublish: '$(Build.SourcesDirectory)/tfplan.binary'  # Path to the Terraform plan binary
+                artifactName: 'terraform-plan'  # Name of the artifact
+                publishLocation: 'Container'
+
+ 
+
+
+
+
+
