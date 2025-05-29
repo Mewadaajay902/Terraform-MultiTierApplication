@@ -15,6 +15,11 @@ stages:
             - task: TerraformInstaller@1
               inputs:
                 terraformVersion: 'latest'
+              
+            - task: replacetokens@6
+              inputs:
+                sources: 'terraform.tfvars'
+                tokenPattern: 'doubleunderscores'
 
 
             - task: AzureCLI@2
