@@ -32,4 +32,5 @@ resource "azurerm_linux_virtual_machine_scale_set" "webvmss" {
       application_gateway_backend_address_pool_ids = var.appgatewayid
     }
   }
+  custom_data = filebase64("./modules/vmss/customscript.sh")
 }
