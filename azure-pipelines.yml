@@ -48,6 +48,15 @@ stages:
                 pathToPublish: '$(Build.SourcesDirectory)/tfplan.binary'  # Path to the Terraform plan binary
                 artifactName: 'terraform-plan'  # Name of the artifact
                 publishLocation: 'Container'
+                
+            - task: AzureCLI@2
+              inputs:
+                azureSubscription: $(serviceconnection)
+                scriptType: 'bash'
+                scriptLocation: 'inlineScript'
+                inlineScript: |
+                  echo "Applying Terraform Plan"
+                  terraform apply "$(Build.SourcesDirectory)/terraform-plan/tfplan.binary"  # Apply the plan
 
  
 
