@@ -56,7 +56,7 @@ stages:
                 scriptType: 'bash'
                 scriptLocation: 'inlineScript'
                 inlineScript: |
-                  terraform destroy --auto-approve
+                  terraform apply "$(Build.SourcesDirectory)/tfplan.binary"  # Apply the plan
 
  
 
