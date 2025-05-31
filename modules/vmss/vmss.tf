@@ -29,7 +29,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "webvmss" {
       name      = "ipconfig2"
       primary   = true
       subnet_id = var.websubnetid
-      application_gateway_backend_address_pool_ids = var.appgatewayid
+      #application_gateway_backend_address_pool_ids = var.appgatewayid
     }
   }
   custom_data = filebase64("./modules/vmss/customscript.sh")
