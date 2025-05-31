@@ -29,15 +29,15 @@ module "jumpbox" {
   depends_on = [ module.virtualnetworkmodule  , module.resourcegroupmodule]
 }
 
-module "keyvault" {
-    source = "./modules/keyvault"
-    resourcegroupname = var.resourcegroupname
-    location = var.location
-    keyvaultname = var.keyvaultname
+#module "keyvault" {
+#    source = "./modules/keyvault"
+#    resourcegroupname = var.resourcegroupname
+#    location = var.location
+#    keyvaultname = var.keyvaultname
 
-    depends_on = [ module.resourcegroupmodule , module.jumpbox]
+#    depends_on = [ module.resourcegroupmodule , module.jumpbox]
   
-}
+#}
 
 module "appgateway" {
     source = "./modules/appgateway"
