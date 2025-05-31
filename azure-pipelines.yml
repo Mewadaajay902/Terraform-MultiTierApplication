@@ -2,6 +2,7 @@ trigger:
   branches:
     exclude:
       - main  
+      - azure-pipelines
 
 
 pool:
@@ -55,7 +56,6 @@ stages:
                 scriptType: 'bash'
                 scriptLocation: 'inlineScript'
                 inlineScript: |
-                  echo "Applying Terraform Plan"
                   terraform destroy "$(Build.SourcesDirectory)/tfplan.binary"  # Apply the plan
 
  
